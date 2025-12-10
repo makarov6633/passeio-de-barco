@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚤 Passeio de Barco - Caleb's Tour Co.
 
-## Getting Started
+Site oficial da **Caleb's Tour Co.** - O Caribe Brasileiro começa aqui!
 
-First, run the development server:
+Um site moderno e responsivo desenvolvido com Next.js para apresentar os passeios de barco e outras experiências turísticas em Arraial do Cabo e região.
 
+## 🌊 Sobre o Projeto
+
+Este site apresenta os serviços da Caleb's Tour Co., incluindo:
+
+- **Passeio de Barco** - A experiência mais completa de Arraial do Cabo
+- **Tour Rio de Janeiro** - Visite o Cristo Redentor e a Cidade Maravilhosa
+- **Jet Ski** - Adrenalina nas águas cristalinas de Cabo Frio
+- **Passeio de Buggy** - Aventura pelas dunas e praias da região
+- **Quadriciclo** - Pilote sua própria aventura off-road
+- **Mergulho de Batismo** - Descubra a vida marinha do Caribe Brasileiro
+- **Transfer** - Serviço de transporte em Cabo Frio
+
+## 🚀 Tecnologias Utilizadas
+
+- **Next.js 16** - Framework React para produção
+- **TypeScript** - Tipagem estática
+- **Tailwind CSS 4** - Estilização moderna e responsiva
+- **React 19** - Biblioteca UI
+- **Lucide React** - Ícones modernos
+
+## 📦 Instalação
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/makarov6633/passeio-de-barco.git
+cd passeio-de-barco
+```
+
+2. Instale as dependências:
+```bash
+npm install
+# ou
+yarn install
+# ou
+pnpm install
+# ou
+bun install
+```
+
+3. Execute o servidor de desenvolvimento:
 ```bash
 npm run dev
-# or
+# ou
 yarn dev
-# or
+# ou
 pnpm dev
-# or
+# ou
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Abra [http://localhost:3000](http://localhost:3000) no navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🏗️ Build para Produção
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## 📱 Funcionalidades
 
-To learn more about Next.js, take a look at the following resources:
+- ✅ Design responsivo e moderno
+- ✅ Hero section com vídeo de fundo
+- ✅ Galeria de imagens interativa
+- ✅ Seção de depoimentos
+- ✅ Integração com WhatsApp para reservas
+- ✅ Informações sobre pontos de encontro
+- ✅ Política de preços para crianças
+- ✅ Botão flutuante do WhatsApp
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📍 Localização
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Ponto de Encontro:** Cais da Praia dos Anjos
+- Check-in: 10:30
+- Saída do Barco: 11:00
 
-## Deploy on Vercel
+## 📞 Contato
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **WhatsApp:** [Agendar Passeio](https://wa.me/5522998249911)
+- **CNPJ:** 26.096.072/0001-78
+- **Endereço:** Travessa Beija-Flor, Jacaré - Cabo Frio, RJ
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🌐 Deploy
+
+O site pode ser facilmente implantado na [Vercel](https://vercel.com), plataforma criada pelos desenvolvedores do Next.js.
+
+## 📄 Licença
+
+© 2025 Caleb's Tour Co. Todos os direitos reservados.
+
+---
+
+**Desenvolvido com ❤️ para proporcionar as melhores experiências turísticas no Caribe Brasileiro!**
