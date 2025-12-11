@@ -1,7 +1,9 @@
 import { getConversationContext, saveConversationContext, getAllPaspos, getOrCreateCliente, createReserva, generateVoucher } from './supabase';
+import { generateAIResponse } from './groq';
 import twilio from 'twilio';
 
 const client = twilio(process.env.TWILIO_ACCOUNT_SID!, process.env.TWILIO_AUTH_TOKEN!);
+const USE_LLM = !!process.env.GROQ_API_KEY;
 
 export type IntentType = 
   | 'saudacao'
@@ -125,7 +127,22 @@ export async function processMessage(telefone: string, message: string): Promise
   const intent = await detectIntent(message);
   const extracted = extractData(message);
 
+  // Salvar histórico para LLM
+  if (!context.conversationHistory) context.conversationHistory = [];
+  if (context.conversationHistory.length > 10) {
+    context.conversationHistory = context.conversationHistory.slice(-10);
+  }
+
   let response = '';
+
+  // Se tiver LLM e não for fluxo de reserva crítico, usar LLM
+  if (USE_LLM && !context.emFluxoReserva && intent !== 'reserva') {
+    const llmResponse = await generateAIResponse(message, context.conversationHistory);
+    context.conversationHistory.push({ role: 'user', content: message });
+    context.conversationHistory.push({ role: 'assistant', content: llmResponse });
+    await saveConversationContext(telefone, context);
+    return llmResponse;
+  }
 
   switch (intent) {
     case 'saudacao':
