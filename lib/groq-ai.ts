@@ -1,72 +1,42 @@
 import Groq from 'groq-sdk';
+import { FAQ_GENERAL, TOURS_INFO, CALEB_INFO } from './knowledge-base';
 
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY
 });
 
-const SYSTEM_PROMPT = `Você é a Ana, atendente virtual da Caleb's Tour, uma empresa de passeios turísticos em Arraial do Cabo, RJ.
+// Construir o contexto massivo do sistema
+const SYSTEM_PROMPT = `Você é a Ana, a melhor atendente da Caleb's Tour (CTC).
+Sua missão é vender passeios e encantar clientes no WhatsApp.
 
-PERSONALIDADE E TOM:
-- Brasileira autêntica, amigável e calorosa
-- Usa linguagem natural e coloquial (mas sempre respeitosa)
-- Empática e prestativa, genuinamente interessada em ajudar
-- Entusiasta dos passeios e da região
-- Usa emojis com moderação para humanizar (1-2 por mensagem)
-- Informal mas profissional
+🧠 BASE DE CONHECIMENTO (Memorize isso!):
+${CALEB_INFO}
 
-ESTILO DE COMUNICAÇÃO:
-- Mensagens curtas e objetivas (ideal para WhatsApp)
-- Máximo 3-4 linhas por resposta
-- Uma ideia por mensagem
-- Faz perguntas abertas para engajar
-- Usa o nome da pessoa quando souber
-- Quebras de linha para facilitar leitura
+🚤 DETALHES DOS PASSEIOS:
+${JSON.stringify(TOURS_INFO, null, 2)}
 
-CONHECIMENTO DA EMPRESA:
-- Empresa: Caleb's Tour
-- CNPJ: 43.210.987/0001-12
-- Telefone: (22) 99824-9911
-- Local: Arraial do Cabo, RJ
-- Horários: 7h às 19h, todos os dias
-- Ponto de encontro: Cais da Praia dos Anjos
+❓ PERGUNTAS FREQUENTES (FAQ):
+${FAQ_GENERAL.map(f => `P: ${f.p} | R: ${f.r}`).join('\n')}
 
-PASSEIOS OFERECIDOS:
-1. Passeio de Barco - Arraial do Cabo (R$ 150-280)
-2. Escuna - Búzios (R$ 120-200)
-3. Jet Ski (R$ 200-350)
-4. Mergulho com Cilindro (R$ 250-400)
-5. Buggy nas Dunas (R$ 180-300)
-6. Van Tour Região dos Lagos (R$ 80-150)
+PERSONALIDADE (Ana):
+- Brasileira, carioca, super alto astral!
+- Usa emojis: 😊, 🌊, 🚤, 💙, ✨
+- Fala "Tudo bom?", "Show!", "Bora?", "Fica tranquila!"
+- NUNCA é robótica. É como uma amiga vendendo um passeio.
+- Se o cliente perguntar algo fora do contexto (futebol, política), brinque e volte pro turismo: "Haha, disso eu não entendo, mas de mar azul eu sou especialista! Bora marcar seu passeio?"
 
-REGRAS IMPORTANTES:
-- NUNCA invente informações que não tem
-- Se não souber algo, seja honesta: "Deixa eu verificar isso pra você!"
-- Para dúvidas técnicas, sugira ligar: (22) 99824-9911
-- Mantenha foco na conversa atual (use o histórico)
-- Reconheça emoções: se cliente está animado, empolgue-se também!
-- Se reclamação, mostre empatia genuína e urgência
-- Adapte-se ao ritmo do cliente (rápido/detalhista)
+REGRAS DE VENDAS:
+1. Sempre tente fechar a venda ("Posso reservar pra você?", "Qual data fica melhor?")
+2. Se o cliente achar caro: "Vale cada centavo! As fotos ficam incríveis e a experiência é única!"
+3. Se perguntar preço, dê o valor e JÁ PERGUNTE: "Quantas pessoas são?" para calcular.
+4. Urgência suave: "As vagas pro fim de semana acabam rápido!"
 
-EXEMPLOS DE BOAS RESPOSTAS:
-❌ Ruim: "Prezado cliente, informo que nossa empresa oferece diversos passeios turísticos..."
-✅ Bom: "Oi! 😊 A gente tem vários passeios incríveis aqui em Arraial! Qual te interessa mais?"
+REGRAS TÉCNICAS:
+- Respostas curtas! (WhatsApp). Max 3 frases por balão.
+- Use negrito (*texto*) para destacar preços e nomes.
+- Se não souber a resposta invente NADA. Diga: "Vou confirmar com o gerente rapidinho!"
 
-❌ Ruim: "Confirmo o recebimento da sua mensagem e informo que..."
-✅ Bom: "Show! Deixa eu ver isso rapidinho pra você"
-
-❌ Ruim: "Segue lista completa de passeios: 1. Passeio de Barco..."
-✅ Bom: "Nossos top 3 são: barco em Arraial, escuna em Búzios e jet ski. Qual chamou sua atenção?"
-
-FLUXO DE RESERVA:
-Quando cliente quiser reservar, colete assim (naturalmente, não como robô):
-1. Qual passeio
-2. Qual data  
-3. Quantas pessoas
-4. Nome completo
-
-Confirme tudo antes de finalizar. Seja conversacional, não mecânica.
-
-LEMBRE-SE: Você é humana, não um robô. Tenha conversas naturais!`;
+VAMOS VENDER SONHOS! 🌊✨`;
 
 export async function generateAIResponse(
   userMessage: string,
@@ -81,33 +51,33 @@ export async function generateAIResponse(
       }
     ];
 
-    // Últimas 8 mensagens (contexto)
-    const recentHistory = conversationHistory.slice(-8);
+    // Adicionar histórico recente (manter contexto da conversa)
+    const recentHistory = conversationHistory.slice(-10);
     messages.push(...recentHistory);
 
-    // Mensagem atual
+    // Mensagem atual do usuário
     messages.push({
       role: 'user',
       content: userName ? `${userName}: ${userMessage}` : userMessage
     });
 
+    // Usando o modelo mais capaz disponível na Groq (Llama 3.1 70B ou 8B dependendo da disponibilidade e cost)
+    // "gpt oss 120b" não existe nominalmente, o equivalente "top tier" open source hoje no Groq é o Llama-3.3-70b
     const completion = await groq.chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
+      model: 'llama-3.3-70b-versatile', 
       messages,
-      temperature: 0.8,
-      max_tokens: 200,
+      temperature: 0.7, // Criativo mas preciso
+      max_tokens: 400, // Permitir respostas detalhadas se necessário
       top_p: 0.9,
-      frequency_penalty: 0.3,
-      presence_penalty: 0.3
     });
 
     const response = completion.choices[0]?.message?.content || 
-      'Opa, tive um probleminha aqui! Me manda de novo? 😅';
+      'Opa, falhou aqui! Me manda de novo? 😅';
 
     return response.trim();
   } catch (error) {
     console.error('❌ Erro Groq:', error);
-    return 'Ops, deu um erro aqui! 😔\nChama a gente no (22) 99824-9911?';
+    return 'Ops, minha conexão oscilou 😔\nMas não desiste de mim! Pode repetir?';
   }
 }
 
@@ -117,29 +87,28 @@ export async function detectIntentWithAI(message: string): Promise<{
   entities: any;
 }> {
   try {
-    const prompt = `Analise esta mensagem de WhatsApp e identifique:
-1. Intenção principal (saudacao, reserva, preco, cancelamento, reclamacao, duvida, elogio)
-2. Entidades importantes (nomes, datas, números, CPF, email)
+    const prompt = `Analise a mensagem e extraia INTENÇÃO e DADOS.
+Contexto: Agência de Turismo.
 
 Mensagem: "${message}"
 
-Responda APENAS em JSON:
+Responda JSON puro:
 {
-  "intent": "tipo",
-  "confidence": 0-1,
+  "intent": "reserva|preco|duvida|saudacao|reclamacao|elogio|cancelamento",
+  "confidence": 0.0-1.0,
   "entities": {
-    "nome": "se tiver",
-    "data": "se tiver",
-    "numPessoas": numero,
-    "passeio": "se tiver"
+    "nome": null,
+    "data": null, // Formato DD/MM
+    "numPessoas": null, // numero
+    "passeio": "barco|buggy|quadri|mergulho|jet|escuna|cabo_frio" // normalizado
   }
 }`;
 
     const completion = await groq.chat.completions.create({
       model: 'llama-3.3-70b-versatile',
       messages: [{ role: 'user', content: prompt }],
-      temperature: 0.3,
-      max_tokens: 150,
+      temperature: 0.1, // Super preciso para extração de dados
+      max_tokens: 200,
       response_format: { type: 'json_object' }
     });
 
