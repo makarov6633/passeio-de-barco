@@ -22,7 +22,7 @@ const tours = [
   {
     id: 'barco-buzios',
     title: 'Escuna - Búzios',
-    image: '/WhatsApp-Image-2025-12-10-at-01.16.22.jpeg',
+    image: '/lancha-privada.jpg',
     description: 'Visite 12 praias e 3 ilhas na charmosa Armação dos Búzios.',
     price: 'Consulte',
     features: ['João Fernandes, Azeda, Tartaruga', 'Paradas para mergulho', 'Duração: 2h30'],
@@ -79,7 +79,7 @@ const tours = [
   {
     id: 'rio-de-janeiro',
     title: 'City Tour Rio',
-    image: '/WhatsApp-Image-2025-12-09-at-13.12.52.jpeg',
+    image: '/rio-city-tour.jpg',
     description: 'Conheça a Cidade Maravilhosa: Cristo Redentor e Pão de Açúcar.',
     price: 'Consulte',
     features: ['Cristo Redentor', 'Transporte executivo', 'Guia credenciado'],
@@ -89,7 +89,7 @@ const tours = [
   {
     id: 'lancha',
     title: 'Lancha Privada',
-    image: '/WhatsApp-Image-2025-12-10-at-01.18.35.jpeg',
+    image: '/lancha-privada.jpg',
     description: 'Exclusividade e conforto para seu grupo fechado.',
     price: 'Sob consulta',
     features: ['Roteiro personalizado', 'Privacidade total', 'Ideal para grupos e eventos'],
