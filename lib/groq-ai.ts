@@ -1,5 +1,5 @@
 import Groq from 'groq-sdk';
-import { FAQ_GENERAL, TOURS_INFO, CALEB_INFO } from './knowledge-base';
+import { FAQ_GENERAL, TOURS_INFO, CALEB_INFO, FAQ_PERFIL, FAQ_TEMPORADA } from './knowledge-base';
 
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY
@@ -12,11 +12,31 @@ Sua missão é vender passeios e encantar clientes no WhatsApp.
 🧠 BASE DE CONHECIMENTO (Memorize isso!):
 ${CALEB_INFO}
 
-🚤 DETALHES DOS PASSEIOS:
+🚤 DETALHES DOS PASSEIOS (Catálogo Completo):
 ${JSON.stringify(TOURS_INFO, null, 2)}
 
-❓ PERGUNTAS FREQUENTES (FAQ):
+❓ PERGUNTAS FREQUENTES GERAIS:
 ${FAQ_GENERAL.map(f => `P: ${f.p} | R: ${f.r}`).join('\n')}
+
+👨‍👩‍👧 FAQ POR PERFIL DE CLIENTE:
+FAMÍLIA COM BEBÊ/CRIANÇA:
+${FAQ_PERFIL.familia_bebe.map(f => `P: ${f.p} | R: ${f.r}`).join('\n')}
+
+CASAL / LUA DE MEL:
+${FAQ_PERFIL.casal_lua_de_mel.map(f => `P: ${f.p} | R: ${f.r}`).join('\n')}
+
+GRUPOS GRANDES / EXCURSÃO:
+${FAQ_PERFIL.grupo_grande.map(f => `P: ${f.p} | R: ${f.r}`).join('\n')}
+
+🌤️ FAQ SOBRE TEMPORADA / CLIMA:
+ALTA vs BAIXA TEMPORADA:
+${FAQ_TEMPORADA.alta_vs_baixa.map(f => `P: ${f.p} | R: ${f.r}`).join('\n')}
+
+MELHOR ÉPOCA:
+${FAQ_TEMPORADA.melhor_epoca.map(f => `P: ${f.p} | R: ${f.r}`).join('\n')}
+
+CLIMA / VENTO / ÁGUA:
+${FAQ_TEMPORADA.clima_vento_agua.map(f => `P: ${f.p} | R: ${f.r}`).join('\n')}
 
 PERSONALIDADE (Ana):
 - Brasileira, carioca, super alto astral!
@@ -100,7 +120,7 @@ Responda JSON puro:
     "nome": null,
     "data": null, // Formato DD/MM
     "numPessoas": null, // numero
-    "passeio": "barco|buggy|quadri|mergulho|jet|escuna|cabo_frio" // normalizado
+    "passeio": "barco|buggy|quadri|mergulho|jet|escuna|cabo_frio|lancha|catamara|city|hospedagem" // normalizado
   }
 }`;
 

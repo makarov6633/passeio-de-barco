@@ -103,5 +103,5 @@ ${data.pontoEncontro}
 
 📞 Dúvidas: (22) 99824-9911
 
-_Caleb's Tour - CNPJ 43.210.987/0001-12_`;
+_Caleb's Tour - CNPJ 26.096.072/0001-78_`;
 }

@@ -194,13 +194,15 @@ async function criarReservaFinal(telefone: string, context: ConversationContext)
     const valorPorPessoa = passeioSelecionado.preco_min && passeioSelecionado.preco_max
       ? (passeioSelecionado.preco_min + passeioSelecionado.preco_max) / 2
       : 200;
-    const valorTotal = valorPorPessoa * context.tempData!.numPessoas!;
+    const numPessoas = context.tempData!.numPessoas!;
+    const dataPasseio = context.tempData!.data!;
+    const valorTotal = valorPorPessoa * numPessoas;
 
     const reserva = await createReserva({
       cliente_id: cliente.id,
       passeio_id: passeioSelecionado.id,
-      data_passeio: context.tempData!.data!,
-      num_pessoas: context.tempData!.numPessoas!,
+      data_passeio: dataPasseio,
+      num_pessoas: numPessoas,
       voucher: voucherCode,
       status: 'PENDENTE',
       valor_total: valorTotal,
@@ -218,8 +220,8 @@ async function criarReservaFinal(telefone: string, context: ConversationContext)
         nome: context.nome,
         telefone,
         passeio: passeioSelecionado.nome,
-        data: context.tempData!.data,
-        numPessoas: context.tempData!.numPessoas,
+        data: dataPasseio,
+        numPessoas,
         voucher: voucherCode,
         valor: valorTotal,
         status: 'PENDENTE'
@@ -236,9 +238,9 @@ async function criarReservaFinal(telefone: string, context: ConversationContext)
       voucherCode,
       clienteNome: context.nome!,
       passeioNome: passeioSelecionado.nome,
-      data: context.tempData!.data || 'A confirmar',
+      data: dataPasseio || 'A confirmar',
       horario: '09:00',
-      numPessoas: context.tempData!.numPessoas || 1,
+      numPessoas: numPessoas || 1,
       valorTotal,
       pontoEncontro: 'Cais da Praia dos Anjos - Arraial do Cabo'
     });
