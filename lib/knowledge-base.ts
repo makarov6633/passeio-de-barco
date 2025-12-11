@@ -99,37 +99,49 @@ export const TOURS_INFO = {
     nome: "Passeio de Quadriciclo",
     categoria: "Aventura Off-Road",
     duracao: "2h30",
-    saidas: ["08:00", "10:30", "13:00", "15:30"],
+    saidas: ["08:00", "10:30", "13:00", "16:30"],
     capacidade: "2 pessoas por máquina",
-    descricao_curta: "Adrenalina nas dunas e lagoas.",
+    descricao_curta: "Passeio guiado pilotando seu próprio quadriciclo por praias, lagoas e dunas.",
     roteiro: [
-      "Pedreira",
-      "Lagoa de Kite Surf",
       "Praia do Pontal",
-      "Prainha",
+      "Lagoa Seca",
+      "Ruínas da Álcalis",
       "Lagoa Vermelha",
       "Praia do Foguete",
-      "Deserto da Praia Grande (dunas)"
+      "Deserto da Praia Grande"
     ],
-    regras: ["CNH B para piloto", "Garupa min. 7 anos", "Tênis/Calçado fechado obrigatório"],
-    incluso: ["Fotos e Vídeos GoPro", "Guia"],
+    regras: [
+      "CNH em qualquer categoria obrigatória para o piloto (CNH física ou digital)",
+      "Proibido ingestão de bebidas alcoólicas antes e durante o passeio",
+      "Passeio com rota pré-determinada e sempre com guia",
+      "Maior de 18 anos para pilotar"
+    ],
+    incluso: ["Guia", "Paradas para banho e fotos"],
+    valores: [
+      "Honda (não automático): R$ 340,00 por veículo",
+      "CFORCE automático CVT: R$ 380,00 por veículo"
+    ],
+    politica_reserva: "Reserva mediante sinal de 50% via transferência bancária ou Pix. Passeio acontece com sol; com chuva pode ser ainda mais divertido.",
     faq: [
-      { p: "Precisa de carteira?", r: "Sim, o piloto precisa de CNH B (carro)." },
-      { p: "Criança pode ir?", r: "Na garupa, a partir de 7 anos." }
+      { p: "Precisa de carteira?", r: "Sim, o piloto precisa ter mais de 18 anos e possuir CNH em qualquer categoria." },
+      { p: "Criança pode ir?", r: "Pode ir como garupa, desde que acompanhada e usando equipamentos de segurança." }
     ]
   },
   buggy: {
     nome: "Passeio de Buggy",
     categoria: "Aventura Off-Road",
-    duracao: "2h",
-    descricao_curta: "Passeio clássico e panorâmico para curtir o vento no rosto e as belezas da região.",
+    duracao: "2h30",
+    descricao_curta: "Passeio panorâmico de 2h30 com paradas para banho e fotos em todas as praias.",
     roteiro: [
-      "Prainha",
+      "Prainha (panorâmico)",
+      "Mirante da Prainha",
       "Praia do Pontal",
-      "Lagoa",
+      "Praia da Curvinha",
+      "Lagoa Vermelha",
       "Praia do Foguete",
-      "Praia Grande (pôr do sol no horário da tarde)"
+      "Deserto da Praia Grande"
     ],
+    valor_referencia: "R$ 400,00 por buggy",
     faq: []
   },
   utv: {
@@ -187,10 +199,20 @@ export const TOURS_INFO = {
     faq: []
   },
   paramotor: {
-    nome: "Voo de Paramotor",
+    nome: "Voo de Paramotor (Voo Duplo de Instrução)",
     categoria: "Aéreos",
-    descricao_curta: "Veja o paraíso de cima com segurança.",
-    ideal_para: ["Casais", "Quem quer fotos aéreas"],
+    descricao_curta: "Voo duplo de 12 a 15 minutos sobre Arraial do Cabo.",
+    duracao: "12 a 15 minutos em voo",
+    local: "Praia do Pontal ou Praia Grande (de acordo com a direção do vento)",
+    valor_referencia: "R$ 400,00 por passageiro (pagamento no dia do voo)",
+    filmagem: "Cliente pode filmar com o próprio celular. Pacote GoPro com vídeo na íntegra + 10 fotos editadas por R$ 70,00.",
+    ideal_para: ["Casais", "Quem quer fotos aéreas", "Quem busca experiência radical, mas segura"],
+    regras: [
+      "Peso máximo padrão do passageiro: 100 kg",
+      "Imagens aéreas feitas pelo próprio passageiro ou pela equipe de filmagem",
+      "Voo sujeito às condições meteorológicas, sempre priorizando a segurança",
+      "Não cobramos sinal; pagamento somente no dia do voo, se as condições permitirem"
+    ],
     faq: []
   },
   city_rio: {
