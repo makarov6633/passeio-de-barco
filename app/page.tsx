@@ -8,7 +8,7 @@ const tours = [
   {
     id: 'barco-arraial',
     title: 'Passeio de Barco - Arraial',
-    image: '/barco-arraial.jpg',
+    image: '/ilha-farol-arraial.jpg',
     description: 'O clássico Caribe Brasileiro. Água liberada e roteiro completo por 3h30 a 4h.',
     tiers: [
       { name: 'Tradicional', price: 'R$ 150', detail: 'Frutas + Água' },
@@ -22,7 +22,7 @@ const tours = [
   {
     id: 'barco-buzios',
     title: 'Escuna - Búzios',
-    image: '/escuna-buzios.jpg',
+    image: '/escuna-buzios-real.jpg',
     description: 'Visite 12 praias e 3 ilhas na charmosa Armação dos Búzios.',
     price: 'Consulte',
     features: ['João Fernandes, Azeda, Tartaruga', 'Paradas para mergulho', 'Duração: 2h30'],
@@ -32,7 +32,7 @@ const tours = [
   {
     id: 'barco-cabofrio',
     title: 'Passeio de Barco - Cabo Frio',
-    image: '/barco-cabofrio.jpg',
+    image: '/barco-cabofrio-real.jpg',
     description: 'Explore a história e as águas cristalinas de Cabo Frio.',
     price: 'Consulte',
     features: ['Ilha do Japonês, Forte São Mateus', 'Ilha dos Papagaios (Mergulho)', 'Duração: 2h30 a 3h'],
@@ -89,7 +89,7 @@ const tours = [
   {
     id: 'lancha',
     title: 'Lancha Privada',
-    image: '/lancha-privada.jpg',
+    image: '/lancha-privada-real.jpg',
     description: 'Exclusividade e conforto para seu grupo fechado.',
     price: 'Sob consulta',
     features: ['Roteiro personalizado', 'Privacidade total', 'Ideal para grupos e eventos'],
@@ -152,12 +152,16 @@ const testimonials = [
 ];
 
 const galleryImages = [
-  '/WhatsApp-Image-2025-12-10-at-01.43.40-(1).jpeg',
-  '/WhatsApp-Image-2025-12-10-at-01.43.40.jpeg',
-  '/WhatsApp-Image-2025-12-10-at-01.34.08.jpeg',
-  '/WhatsApp-Image-2025-12-10-at-01.16.19.jpeg',
-  '/WhatsApp-Image-2025-12-10-at-01.16.22.jpeg',
-  '/WhatsApp-Image-2025-12-10-at-01.18.35.jpeg',
+  '/ilha-farol-arraial.jpg',
+  '/barco-toboagua.jpg',
+  '/barco-toboagua-2.jpg',
+  '/escuna-buzios-real.jpg',
+  '/escuna-proa.jpg',
+  '/escuna-mulher.jpg',
+  '/vista-buzios.jpg',
+  '/agua-liberada.jpg',
+  '/lancha-privada-real.jpg',
+  '/barco-cabofrio-real.jpg',
   '/mergulho-arraial.jpg',
   '/quadriciclo-dunas.jpg',
   '/buggy-dunas.jpg',
