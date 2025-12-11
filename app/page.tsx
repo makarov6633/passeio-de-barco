@@ -79,7 +79,7 @@ const tours = [
   {
     id: 'rio-de-janeiro',
     title: 'City Tour Rio',
-    image: '/city-tour-rio.jpg',
+    image: '/WhatsApp-Image-2025-12-10-at-01.16.16.jpeg',
     description: 'Conheça a Cidade Maravilhosa: Cristo Redentor e Pão de Açúcar.',
     price: 'Consulte',
     features: ['Cristo Redentor', 'Transporte executivo', 'Guia credenciado'],
