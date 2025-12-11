@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS reservas (
   numero_pessoas INTEGER DEFAULT 1,
   valor_estimado DECIMAL(10, 2),
   observacoes TEXT,
+  voucher VARCHAR(50) UNIQUE,
   status VARCHAR(20) DEFAULT 'pendente' CHECK (status IN ('pendente', 'confirmado', 'cancelado', 'realizado')),
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -47,11 +48,22 @@ CREATE TABLE IF NOT EXISTS passeios (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
+-- Tabela de Contextos de Conversação (para o agente IA)
+CREATE TABLE IF NOT EXISTS conversation_contexts (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  telefone VARCHAR(20) UNIQUE NOT NULL,
+  context_data JSONB NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
 -- Índices para performance
 CREATE INDEX IF NOT EXISTS idx_reservas_status ON reservas(status);
 CREATE INDEX IF NOT EXISTS idx_reservas_data ON reservas(data_preferida);
 CREATE INDEX IF NOT EXISTS idx_reservas_cliente ON reservas(cliente_id);
+CREATE INDEX IF NOT EXISTS idx_reservas_voucher ON reservas(voucher);
 CREATE INDEX IF NOT EXISTS idx_clientes_telefone ON clientes(telefone);
+CREATE INDEX IF NOT EXISTS idx_contexts_telefone ON conversation_contexts(telefone);
 
 -- Trigger para atualizar updated_at automaticamente
 CREATE OR REPLACE FUNCTION update_updated_at_column()
@@ -69,6 +81,11 @@ CREATE TRIGGER update_clientes_updated_at
 
 CREATE TRIGGER update_reservas_updated_at
   BEFORE UPDATE ON reservas
+  FOR EACH ROW
+  EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_contexts_updated_at
+  BEFORE UPDATE ON conversation_contexts
   FOR EACH ROW
   EXECUTE FUNCTION update_updated_at_column();
 
@@ -105,6 +122,7 @@ ON CONFLICT (id) DO NOTHING;
 ALTER TABLE clientes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE reservas ENABLE ROW LEVEL SECURITY;
 ALTER TABLE passeios ENABLE ROW LEVEL SECURITY;
+ALTER TABLE conversation_contexts ENABLE ROW LEVEL SECURITY;
 
 -- Políticas de acesso (permissão total para service role)
 CREATE POLICY "Service role can do anything on clientes"
@@ -123,6 +141,12 @@ CREATE POLICY "Anyone can read passeios"
   ON passeios FOR SELECT
   TO anon, authenticated
   USING (ativo = true);
+
+CREATE POLICY "Service role can do anything on contexts"
+  ON conversation_contexts FOR ALL
+  TO service_role
+  USING (true)
+  WITH CHECK (true);
 
 -- View para estatísticas (opcional)
 CREATE OR REPLACE VIEW reservas_stats AS
