@@ -60,7 +60,7 @@ export async function GET() {
     version: '4.0-FINAL',
     timestamp: new Date().toISOString(),
     services: {
-      groq: hasGroq ? '✅ Conectado (llama-3.3-70b)' : '❌ Desconectado',
+      groq: hasGroq ? '✅ Conectado (openai/gpt-oss-120b)' : '❌ Desconectado',
       supabase: hasSupabase ? '✅ Conectado' : '❌ Desconectado',
       twilio: hasTwilio ? '✅ Conectado' : '❌ Desconectado'
     },

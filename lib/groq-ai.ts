@@ -61,10 +61,10 @@ export async function generateAIResponse(
       content: userName ? `${userName}: ${userMessage}` : userMessage
     });
 
-    // Usando o modelo mais capaz disponível na Groq (Llama 3.1 70B ou 8B dependendo da disponibilidade e cost)
-    // "gpt oss 120b" não existe nominalmente, o equivalente "top tier" open source hoje no Groq é o Llama-3.3-70b
+    // Usando o modelo solicitado GPT-OSS 120B hospedado na Groq
+    // No endpoint da Groq o ID correto do modelo é "openai/gpt-oss-120b"
     const completion = await groq.chat.completions.create({
-      model: 'llama-3.3-70b-versatile', 
+      model: 'openai/gpt-oss-120b', 
       messages,
       temperature: 0.7, // Criativo mas preciso
       max_tokens: 400, // Permitir respostas detalhadas se necessário
@@ -105,7 +105,7 @@ Responda JSON puro:
 }`;
 
     const completion = await groq.chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
+      model: 'openai/gpt-oss-120b',
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.1, // Super preciso para extração de dados
       max_tokens: 200,
